@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {addArticle} from './../../actions';
+import './addUserForm.css';
 
 export const AddArticleForm = ({addArticle}) => {
     const handleSubmit = (evt) => {
@@ -12,9 +13,9 @@ export const AddArticleForm = ({addArticle}) => {
         evt.target.reset();
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="user-form">
             <input name="title" placeholder="Title" required />
-            <textarea name="text" placeholder="Text" />
+            <textarea name="text" placeholder="Text" required />
             <button>Add article</button>
         </form>
     )

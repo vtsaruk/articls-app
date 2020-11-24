@@ -1,3 +1,11 @@
 .container-app {
   display: flex;
 }
+
+.article-cell {
+  padding: 1rem;
+}
+
+.article-list {
+  list-style: none;
+}

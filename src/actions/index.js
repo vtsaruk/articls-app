@@ -6,6 +6,7 @@ import {
     DELETE_ARTICLE, 
     GET_USER_LIST,
     GET_ARTICLE_LIST,
+    LOAD_ARTICLES_FROM_LOCALSTORE,
 } from './constants';
 
 import {getLocalData, setLoalData} from '../utils/common';
@@ -13,9 +14,9 @@ import {getLocalData, setLoalData} from '../utils/common';
 export const addUser = ({name}) => (dispatch, select) => {
     const store = select();
     const id = Math.floor(Math.random() * Math.floor(10000));
-    const newUser = {name, id};
-    setLoalData('userList', [...store.users, newUser]);
-    dispatch({type: ADD_USER, payload: newUser});
+    const user = {name, id};
+    setLoalData('userList', [...store.users, user]);
+    dispatch({type: ADD_USER, payload: {user}});
 }
 
 export const toggleUser = (id) => (dispatch, select) => {
@@ -26,8 +27,9 @@ export const toggleUser = (id) => (dispatch, select) => {
 }
 
 export const getCurrentUser = () => dispatch => {
-    const user = getLocalData('currentUser') || {};
-    dispatch({type: GET_CURRENT_USER, payload: {user}});
+    const currentUser = getLocalData('currentUser') || {};
+
+    dispatch({type: GET_CURRENT_USER, payload: {currentUser}});
 }  
 
 export const getUserList = () => dispatch => {
@@ -38,16 +40,23 @@ export const getUserList = () => dispatch => {
 export const addArticle = ({title, text}) => (dispatch, select) => {
     const id = Math.floor(Math.random() * Math.floor(10000));
     const store = select();
-    const newArticle = {title, text, id, userId: store.currentUser.id}
-    setLoalData('articleList', [...store.articles, newArticle]);
-    dispatch({type: ADD_ARTICLE, payload: newArticle});
+    const allArticles = getLocalData('articleList') || [];
+    const article = {title, text, id, userId: store.currentUser.id}
+    setLoalData('articleList', [...allArticles, article]);
+    dispatch({type: ADD_ARTICLE, payload: {article}});
 }
 
-export const daleteArticle = (id) => dispatch => {
+export const deleteArticle = (id) => dispatch => {
     dispatch ({type: DELETE_ARTICLE, payload: {id}});
 }
 
-export const getArticles = ({userId}) => (dispatch, select) => {
-    const articles = getLocalData('articleList', ) || [];;
+export const getArticles = (userId) => (dispatch) => {
+    const allArticles = getLocalData('articleList', ) || [];
+    const articles = allArticles.filter(_ => _.userId === userId);
+    dispatch({type: GET_ARTICLE_LIST, payload:{articles}});
+}
+
+export const loadAllArticlesFromLoacalstore = () => (dispatch) => {
+    const articles = getLocalData('articleList', ) || [];
     dispatch({type: GET_ARTICLE_LIST, payload:{articles}});
 }

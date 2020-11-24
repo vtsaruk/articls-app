@@ -7,8 +7,7 @@ export const articlesReducer = (state = [], action) => {
             return [...state, payload.article];
         }
         case GET_ARTICLE_LIST:{
-            const users = Object.assign(payload.articles, state);
-            return users;
+            return [...state.slice(0, 0), ...payload.articles];
         }
         case DELETE_ARTICLE: {
             const users = state.filter(article => article.id !== payload.id);

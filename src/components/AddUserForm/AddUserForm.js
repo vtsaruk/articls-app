@@ -13,7 +13,7 @@ export const AddUserForm = ({addUser}) => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <input name="userName" />
+            <input name="userName" required />
             <button>add user</button>
         </form>
     )
