@@ -10,7 +10,6 @@ import {
 
 export const addUser = ({name}) => dispatch => {
     const id = Math.floor(Math.random() * Math.floor(10000));
-
     dispatch({type: ADD_USER, payload: {name, id}});
 }
 

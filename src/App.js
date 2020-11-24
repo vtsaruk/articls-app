@@ -13,7 +13,9 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 function App() {
   return (
     <Provider store={store}>
-      <Routing />
+      <div className="container-app">
+        <Routing />
+      </div>
     </Provider>
   );
 }

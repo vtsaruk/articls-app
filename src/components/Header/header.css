@@ -1,0 +1,11 @@
+.app-menu {
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background: #ccc;
+  width: 300px;
+}
+
+.app-menu .user-list li {
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
