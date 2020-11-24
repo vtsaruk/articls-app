@@ -1,6 +1,7 @@
 import {
     ADD_USER, 
-    TOGGLE_USER,
+    TOGGLE_CURRENT_USER,
+    GET_CURRENT_USER,
     ADD_ARTICLE,
     DELETE_ARTICLE, 
     GET_USER_LIST,
@@ -14,8 +15,13 @@ export const addUser = ({name}) => dispatch => {
 }
 
 export const toggleUser = ({id}) => dispatch => {
-    dispatch({type: TOGGLE_USER, id});
+    dispatch({type: TOGGLE_CURRENT_USER, id});
 }
+
+export const getCurrentUser = () => dispatch => {
+    const user = {}
+    dispatch({type: GET_CURRENT_USER, user});
+}  
 
 export const getUserList = () => dispatch => {
     const users = [];
