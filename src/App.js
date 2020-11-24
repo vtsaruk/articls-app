@@ -6,16 +6,12 @@ import { rootReducer } from './reducers';
 import {Routing} from './scenes';
 import './App.css';
 
-
-
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="container-app">
-        <Routing />
-      </div>
+      <Routing />
     </Provider>
   );
 }

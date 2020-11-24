@@ -9,6 +9,7 @@ export const AddUserForm = ({addUser}) => {
         evt.preventDefault();
         const name = evt.target['userName'].value.trim();
         addUser({name});
+        evt.target.reset();
     }
     return (
         <form onSubmit={handleSubmit}>

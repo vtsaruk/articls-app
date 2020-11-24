@@ -1,12 +1,13 @@
 import {TOGGLE_CURRENT_USER, GET_CURRENT_USER} from '../actions/constants';
 
 export const currentUserReducer = (state = {}, action) => {
-    switch (action.type) {
+    const {type, payload} = action;
+    switch (type) {
         case TOGGLE_CURRENT_USER: {
-            return {...state, ...action.user};
+            return {...state, ...payload.currentUser};
         }
         case GET_CURRENT_USER:{
-            return {...state, ...action.user};
+            return {...state, ...payload.currentUser};
         }
         default:
             return state;
