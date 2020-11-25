@@ -1,19 +1,22 @@
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
-import {getCurrentUser, loadAllArticlesFromLoacalstore} from '../actions';
+
+import {getCurrentUser, loadAllArticlesFromLoacalstore, startLoader} from '../actions';
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
         loadUser: ()=> dispatch(getCurrentUser()),
         loadArticles: () => dispatch(loadAllArticlesFromLoacalstore()),
+        startLoader: () => dispatch(startLoader()),
     }
 }
 
 const AuthenticatedContainer = connect(null, mapDispatchToProps)(
-    ({loadUser, children, loadArticles}) => {
+    ({loadUser, children, loadArticles, startLoader}) => {
 
         useEffect(()=>{
+            startLoader();
             loadUser();
             loadArticles();
         }, [])

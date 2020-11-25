@@ -6,7 +6,8 @@ import {
     DELETE_ARTICLE, 
     GET_USER_LIST,
     GET_ARTICLE_LIST,
-    LOAD_ARTICLES_FROM_LOCALSTORE,
+    IS_LOADER,
+    IS_NOT_LOADER,
 } from './constants';
 
 import {getLocalData, setLoalData} from '../utils/common';
@@ -59,4 +60,10 @@ export const getArticles = (userId) => (dispatch) => {
 export const loadAllArticlesFromLoacalstore = () => (dispatch) => {
     const articles = getLocalData('articleList', ) || [];
     dispatch({type: GET_ARTICLE_LIST, payload:{articles}});
+    dispatch({type: IS_NOT_LOADER});
 }
+
+export const startLoader = () => dispatch => dispatch({type: IS_LOADER});
+export const endLoader = () => dispatch => dispatch({type: IS_NOT_LOADER})
+
+

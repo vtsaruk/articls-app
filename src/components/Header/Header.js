@@ -19,6 +19,7 @@ export const Header = ({users, history, loadUsers, toggleUser}) => {
     return (
 
         <div className="app-menu">
+           <h5>user list</h5>
            <AddUserForm />
            <ul className="user-list">
                 {users.map(({id, name}) => (

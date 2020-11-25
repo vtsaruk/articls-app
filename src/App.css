@@ -4,6 +4,7 @@
 
 .article-cell {
   padding: 1rem;
+  cursor: pointer;
 }
 
 .article-list {

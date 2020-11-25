@@ -2,17 +2,19 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { Redirect} from "react-router-dom";
 import AddArticleForm from '../components/AddArticleForm';
 import {getArticles} from '../actions';
-import {ARTICLES_ID} from '../scenes/constants';
+import {ARTICLES_ID, HOME} from '../scenes/constants';
 import {getUserById} from '../selectors';
 
 const UserArticles = (props) => {
-    const { articles, loadArticles, match, history, user } = props;
+    const { articles, loadArticles, match, history, user, isLoader} = props;
     useEffect(() => {
         loadArticles(Number(match.params.userId));
     }, [match]);
-
+    
+    console.log('debugger', isLoader)
     const renderArticle = ({id, title, text }) => {
         const handleClick = () => {
             history.push(ARTICLES_ID.replace(':articleId?', id));
@@ -26,6 +28,14 @@ const UserArticles = (props) => {
                 <p>{text}</p>
             </li>
             )
+    }
+
+    if (isLoader) {
+        return null;
+    }
+
+    if (!user.id && !isLoader) {
+        return <Redirect to={HOME} />
     }
     
     return (
@@ -46,6 +56,7 @@ UserArticles.propTypes = {
 const mapStateToProps = (state, {match}) => ({
     articles: state.articles,
     user: getUserById(state, match.params),
+    isLoader: state.isLoader,
 })
 
 
